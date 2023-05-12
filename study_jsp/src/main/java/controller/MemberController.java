@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import domain.MemberVO;
 import service.MemberService;
 import service.MemberServiceImpl;
 
@@ -28,13 +29,14 @@ public class MemberController extends HttpServlet {
 	private int isOk;
 	private String destPage;
 	
+	MemberVO mvo;
 	private String id;
 	private String password;
 	private String name;
 	private String email;
 	private int phone;
-	private String regdate;
-	private String lastlogin;
+//	private String regdate;
+//	private String lastlogin;
        
     public MemberController() {
         msv = new MemberServiceImpl();
@@ -46,12 +48,32 @@ public class MemberController extends HttpServlet {
 		res.setContentType("text/html; charset=UTF-8");
 		
 		String uri = req.getRequestURI();
-		log.info(uri);
+		String path = uri.substring(uri.lastIndexOf("/") + 1);
+		log.info("uri : " + uri);
+		log.info("path : " + path);
 		
-		switch (uri) {
-		case "/mem/login":
+		switch (path) {
+		case "login":
+			destPage = "/member/login.jsp";
+			
 			break;
-		case "/mem/join":
+		case "join":
+			destPage = "/member/join.jsp";
+			
+			break;
+		case "register":
+			id = req.getParameter("id");
+			password = req.getParameter("password");
+			name = req.getParameter("name");
+			email = req.getParameter("email");
+			phone = Integer.parseInt(req.getParameter("phone"));
+			mvo = new MemberVO(id, password, name, email, phone);
+			
+			isOk = msv.register(mvo);
+			log.info("* 회원가입 : " + (isOk > 0 ? "성공" : "실패"));
+			
+			destPage = "index.jsp";
+			
 			break;
 		default:
 			break;

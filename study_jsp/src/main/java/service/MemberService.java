@@ -1,5 +1,7 @@
 package service;
 
-public interface MemberService {
+import domain.MemberVO;
 
+public interface MemberService {
+	int register(MemberVO mvo);
 }
