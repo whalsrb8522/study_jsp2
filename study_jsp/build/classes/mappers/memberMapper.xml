@@ -7,6 +7,6 @@
 		values (#{id}, #{password}, #{name}, #{email}, #{phone})
 	</insert>
 	<select id="list" resultType="map">
-		select id, name, regdate from member;
+		select id, name, regdate from member order by regdate;
 	</select>
 </mapper>
