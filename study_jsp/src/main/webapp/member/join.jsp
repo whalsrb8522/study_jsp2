@@ -4,10 +4,10 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Join</title>
+<title>Join Page</title>
 </head>
 <body>
-	<h1>Join</h1>
+	<h1>Join Page</h1>
 
 	<form action="/mem/register" method="post">
 		<table>
@@ -34,6 +34,7 @@
 		</table>
 		
 		<button type="submit">가입완료</button>
+		<a href="/index.jsp"><button type="button">취소</button></a>
 	</form>
 </body>
 </html>

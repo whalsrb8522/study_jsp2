@@ -5,10 +5,10 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>List page</title>
 </head>
 <body>
-	<h1>관리자 페이지 (회원 목록)</h1>
+	<h1>List page</h1>
 
 	<table border="1" style="border-collapse: collapse;">
 		<tr>
