@@ -1,6 +1,7 @@
 package controller;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -76,7 +77,13 @@ public class MemberController extends HttpServlet {
 			destPage = "/index.jsp";
 			
 			break;
-		default:
+		case "list":
+			List<MemberVO> list = msv.list();
+			
+			req.setAttribute("list", list);
+			
+			destPage = "/member/list.jsp";
+			
 			break;
 		}
 		

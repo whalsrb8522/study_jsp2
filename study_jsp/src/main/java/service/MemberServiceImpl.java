@@ -1,5 +1,7 @@
 package service;
 
+import java.util.List;
+
 import domain.MemberVO;
 import repository.MemberDAO;
 import repository.MemberDAOImpl;
@@ -14,5 +16,10 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public int register(MemberVO mvo) {
 		return mdao.insert(mvo);
+	}
+
+	@Override
+	public List<MemberVO> list() {
+		return mdao.list();
 	}
 }

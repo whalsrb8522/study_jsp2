@@ -11,5 +11,6 @@
 	
 	<a href="/mem/login"><button>Sign in</button></a>
 	<a href="/mem/join"><button>Sign up</button></a>
+	<a href="/mem/list"><button>list</button></a>
 </body>
 </html>

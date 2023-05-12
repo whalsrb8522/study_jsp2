@@ -1,12 +1,19 @@
 package repository;
 
+import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+
 import org.apache.ibatis.session.SqlSession;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import domain.MemberVO;
 import orm.DatabaseBuilder;
 
 public class MemberDAOImpl implements MemberDAO {
-//	private static final Logger log = LoggerFactory.getLogger(MemberDAOImpl.class);
+	private static final Logger log = LoggerFactory.getLogger(MemberDAOImpl.class);
 
 	private SqlSession sql;
 	
@@ -22,10 +29,16 @@ public class MemberDAOImpl implements MemberDAO {
 	@Override
 	public int insert(MemberVO mvo) {
 		// sql.insert(NS + 이름, 객체);
-		int isOk = sql.insert(NS+"reg", mvo);
+		int isOk = sql.insert(NS + "reg", mvo);
 		if(isOk > 0) {
 			sql.commit();
 		}
 		return isOk;
+	}
+
+	@Override
+	public List<MemberVO> list() {
+		List<MemberVO> list = sql.selectList(NS + "list");
+		return list;
 	}
 }
