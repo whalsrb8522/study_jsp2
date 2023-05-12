@@ -13,7 +13,7 @@ public class MemberVO {
 	private String password;
 	private String name;
 	private String email;
-	private int phone;
+	private String phone;
 	private String regdate;
 	private String lastlogin;
 	
@@ -26,8 +26,8 @@ public class MemberVO {
 		this.password = password;
 	}
 	
-	// 회원 가입
-	public MemberVO(String id, String password, String name, String email, int phone) {
+	// 회원 가입, 회원 수정
+	public MemberVO(String id, String password, String name, String email, String phone) {
 		this.id = id;
 		this.password = password;
 		this.name = name;
@@ -43,8 +43,7 @@ public class MemberVO {
 	}	
 	
 	// 회원 상세
-	public MemberVO(String id, String name, String email, int phone, String regdate, String lastlogin) {
-		super();
+	public MemberVO(String id, String name, String email, String phone, String regdate, String lastlogin) {
 		this.id = id;
 		this.name = name;
 		this.email = email;
@@ -52,16 +51,7 @@ public class MemberVO {
 		this.regdate = regdate;
 		this.lastlogin = lastlogin;
 	}
-
-	// 회원 수정
-	public MemberVO(String id, String password, String name, String email, int phone, String regdate) {
-		this.id = id;
-		this.password = password;
-		this.name = name;
-		this.email = email;
-		this.phone = phone;
-	}
-
+	
 	
 	
 	// getter
@@ -81,7 +71,7 @@ public class MemberVO {
 		return email;
 	}
 
-	public int getPhone() {
+	public String getPhone() {
 		return phone;
 	}
 
@@ -110,7 +100,7 @@ public class MemberVO {
 		this.email = email;
 	}
 
-	public void setPhone(int phone) {
+	public void setPhone(String phone) {
 		this.phone = phone;
 	}
 

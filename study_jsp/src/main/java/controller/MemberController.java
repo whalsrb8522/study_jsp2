@@ -34,7 +34,7 @@ public class MemberController extends HttpServlet {
 	private String password;
 	private String name;
 	private String email;
-	private int phone;
+	private String phone;
 //	private String regdate;
 //	private String lastlogin;
        
@@ -66,13 +66,14 @@ public class MemberController extends HttpServlet {
 			password = req.getParameter("password");
 			name = req.getParameter("name");
 			email = req.getParameter("email");
-			phone = Integer.parseInt(req.getParameter("phone"));
+			phone = req.getParameter("phone");
+			
 			mvo = new MemberVO(id, password, name, email, phone);
 			
 			isOk = msv.register(mvo);
 			log.info("* 회원가입 : " + (isOk > 0 ? "성공" : "실패"));
 			
-			destPage = "index.jsp";
+			destPage = "/index.jsp";
 			
 			break;
 		default:
@@ -84,10 +85,12 @@ public class MemberController extends HttpServlet {
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		service(request, response);
+		//response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		doGet(request, response);
+		service(request, response);
+		//doGet(request, response);
 	}
 }

@@ -15,10 +15,9 @@ public class DatabaseBuilder {
 	
 	static {
 		try {
-			factory = new SqlSessionFactoryBuilder().build(
-					Resources.getResourceAsStream(config));
+			factory = new SqlSessionFactoryBuilder().build(Resources.getResourceAsStream(config));
 		}catch (IOException e) {
-			log.info("Mybatis 설정 요류");
+			log.info("Mybatis 설정 오류");
 			e.printStackTrace();
 		}		
 	}
