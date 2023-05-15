@@ -9,6 +9,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -29,6 +30,7 @@ public class MemberController extends HttpServlet {
 	private MemberService msv;
 	private int isOk;
 	private String destPage;
+	HttpSession ses;
 	
 	MemberVO mvo;
 	private String id;
@@ -36,8 +38,6 @@ public class MemberController extends HttpServlet {
 	private String name;
 	private String email;
 	private String phone;
-//	private String regdate;
-//	private String lastlogin;
        
     public MemberController() {
         msv = new MemberServiceImpl();
@@ -45,8 +45,7 @@ public class MemberController extends HttpServlet {
 
 	protected void service(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 		req.setCharacterEncoding("UTF-8");
-		res.setCharacterEncoding("UTF-8");
-		res.setContentType("text/html; charset=UTF-8");
+		res.setCharacterEncoding("UTF-8");		res.setContentType("text/html; charset=UTF-8");
 		
 		String uri = req.getRequestURI();
 		String path = uri.substring(uri.lastIndexOf("/") + 1);
@@ -54,25 +53,123 @@ public class MemberController extends HttpServlet {
 		log.info("path : " + path);
 		
 		switch (path) {
-		case "login":
+		case "sign_in_s1":
 			destPage = "/member/login.jsp";
 			
 			break;
-		case "join":
+		case "sign_in_s2":
+			try {
+				id = req.getParameter("id");
+				password = req.getParameter("password");
+				mvo = new MemberVO(id, password);
+				
+				// 해당 ID, password가 DB상에 있는지 체크
+				// 해당 객체(사용자)를 가져와서
+				// 해당 객체(사용자를) 세션에 담기
+				MemberVO loginMvo = msv.login(mvo);
+				
+				if(loginMvo != null) {
+					ses = req.getSession();		// 세션 가져오기
+					ses.setAttribute("ses", loginMvo);
+					ses.setMaxInactiveInterval(1 * 60);		// 로그인 유지 시간 (초단위)
+				} else {
+					req.setAttribute("msg_login", 0);
+				}
+				
+				destPage = "/index.jsp";
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			
+			break;
+		case "sign_up_s1":
 			destPage = "/member/join.jsp";
 			
 			break;
-		case "register":
+		case "sign_up_s2":
 			id = req.getParameter("id");
 			password = req.getParameter("password");
 			name = req.getParameter("name");
 			email = req.getParameter("email");
 			phone = req.getParameter("phone");
-			
 			mvo = new MemberVO(id, password, name, email, phone);
 			
 			isOk = msv.register(mvo);
 			log.info("* 회원가입 : " + (isOk > 0 ? "성공" : "실패"));
+			
+			destPage = "/index.jsp";
+			
+			break;
+		case "modify_s1":
+			ses = req.getSession();
+
+			mvo = (MemberVO) ses.getAttribute("ses");
+			
+			MemberVO resultMvo = msv.detail(mvo);
+			
+			req.setAttribute("mvo", resultMvo);
+			
+			destPage = "/member/modify.jsp";
+			
+			break;
+		case "modify_s2":
+			id = req.getParameter("id");
+			password = req.getParameter("password");
+			name = req.getParameter("name");
+			email = req.getParameter("email");
+			phone = req.getParameter("phone");
+			mvo = new MemberVO(id, password, name, email, phone);
+			
+			isOk = msv.modify(mvo);
+			log.info("* 회원수정 : " + (isOk > 0 ? "성공" : "실패"));
+			
+			destPage = "/index.jsp";
+			
+			break;
+		case "detail":
+			id = req.getParameter("id");
+			
+			mvo = new MemberVO(id);
+			
+			req.setAttribute("mvo", msv.detail(mvo));
+			
+			destPage = "/member/modify.jsp";
+			
+			break;
+		case "logout":
+			try {
+				ses = req.getSession();
+				
+				// 마지막 로그인 시간 기록
+				mvo = (MemberVO) ses.getAttribute("ses");
+				id = mvo.getId();
+				log.info("* logout id : " + id);
+				
+				// 로그인정보를 주고 마지막 로그인 시간 기록
+				isOk = msv.lastlogin(id);
+				
+				ses.invalidate();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			
+			destPage = "/index.jsp";
+			
+			break;
+		case "delete":
+			ses = req.getSession();
+			mvo = (MemberVO) ses.getAttribute("ses");
+			
+			id = req.getParameter("id");
+			
+			isOk = msv.delete(id);
+			
+			log("* sessionID : " + mvo.getId());
+			if (isOk > 0 && id.equals((mvo.getId()))) {
+				ses.invalidate();
+			} else if (isOk <= 0) {
+				req.setAttribute("msg_delete", 0);
+			}
 			
 			destPage = "/index.jsp";
 			

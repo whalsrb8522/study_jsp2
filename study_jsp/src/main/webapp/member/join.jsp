@@ -9,7 +9,7 @@
 <body>
 	<h1>Join Page</h1>
 
-	<form action="/mem/register" method="post">
+	<form action="/mem/sign_up_s2" method="post">
 		<table>
 			<tr>
 				<td>ID</td>

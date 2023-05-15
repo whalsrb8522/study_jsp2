@@ -1,19 +1,14 @@
 package repository;
 
-import java.sql.ResultSet;
-import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import domain.MemberVO;
 import orm.DatabaseBuilder;
 
 public class MemberDAOImpl implements MemberDAO {
-	private static final Logger log = LoggerFactory.getLogger(MemberDAOImpl.class);
+//	private static final Logger log = LoggerFactory.getLogger(MemberDAOImpl.class);
 
 	private SqlSession sql;
 	
@@ -40,5 +35,42 @@ public class MemberDAOImpl implements MemberDAO {
 	public List<MemberVO> list() {
 		List<MemberVO> list = sql.selectList(NS + "list");
 		return list;
+	}
+
+	@Override
+	public MemberVO selectOne(MemberVO mvo) {
+		return sql.selectOne(NS + "login", mvo);
+	}
+
+	@Override
+	public int updateLastLogin(String id) {
+		int isOk = sql.update(NS + "lastlogin", id);
+		if (isOk > 0) {
+			sql.commit();
+		}
+		return isOk;
+	}
+
+	@Override
+	public int updateOne(MemberVO mvo) {
+		int isOk = sql.update(NS + "modify", mvo);
+		if (isOk > 0) {
+			sql.commit();
+		}
+		return isOk;
+	}
+
+	@Override
+	public MemberVO selectDetail(MemberVO mvo) {
+		return sql.selectOne(NS + "detail", mvo);
+	}
+
+	@Override
+	public int deleteOne(String id) {
+		int isOk = sql.delete(NS + "delete", id);
+		if (isOk > 0) {
+			sql.commit();
+		}
+		return isOk;
 	}
 }

@@ -16,9 +16,15 @@ public class MemberVO {
 	private String phone;
 	private String regdate;
 	private String lastlogin;
+	private boolean auth;
 	
 	// 기본 생성자
 	public MemberVO() {}
+	
+	// 관리자 회원 수정
+	public MemberVO(String id) {
+		this.id = id;
+	}
 	
 	// 로그인
 	public MemberVO(String id, String password) {
@@ -82,6 +88,10 @@ public class MemberVO {
 	public String getLastlogin() {
 		return lastlogin;
 	}
+	
+	public boolean getAuth() {
+		return auth;
+	}
 
 	// setter
 	public void setId(String id) {
@@ -110,5 +120,9 @@ public class MemberVO {
 
 	public void setLastlogin(String lastlogin) {
 		this.lastlogin = lastlogin;
+	}
+	
+	public void setAuth(boolean auth) {
+		this.auth = auth;
 	}
 }

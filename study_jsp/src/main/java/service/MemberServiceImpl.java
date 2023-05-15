@@ -22,4 +22,29 @@ public class MemberServiceImpl implements MemberService {
 	public List<MemberVO> list() {
 		return mdao.list();
 	}
+
+	@Override
+	public MemberVO login(MemberVO mvo) {
+		return mdao.selectOne(mvo);
+	}
+
+	@Override
+	public int lastlogin(String id) {
+		return mdao.updateLastLogin(id);
+	}
+
+	@Override
+	public MemberVO detail(MemberVO mvo) {
+		return mdao.selectDetail(mvo);
+	}
+
+	@Override
+	public int modify(MemberVO mvo) {
+		return mdao.updateOne(mvo);
+	}
+
+	@Override
+	public int delete(String id) {
+		return mdao.deleteOne(id);
+	}
 }
