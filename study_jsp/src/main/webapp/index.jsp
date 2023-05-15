@@ -28,9 +28,12 @@
 		</c:when>
 	</c:choose>
 	
-	<script type="text/javascript">
+	<script>
 		const msg_login = `<c:out value="${msg_login }" />`;
 		const msg_delete = `<c:out value="${msg_delete }" />`;
+		
+		console.log(msg_login);
+		console.log(msg_delete);
 		
 		if (msg_login === '0') {
 			alert("로그인 실패");
@@ -38,6 +41,8 @@
 		
 		if (msg_delete === '0') {
 			alert("회원 삭제 실패");
+		} else if (msg_delete === '1') {
+			alert("회원 삭제 성공");
 		}
 	</script>
 </body>

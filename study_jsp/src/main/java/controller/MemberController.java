@@ -164,10 +164,12 @@ public class MemberController extends HttpServlet {
 			
 			isOk = msv.delete(id);
 			
-			log("* sessionID : " + mvo.getId());
-			if (isOk > 0 && id.equals((mvo.getId()))) {
-				ses.invalidate();
-			} else if (isOk <= 0) {
+			if (isOk > 0) {
+				if (id.equals((mvo.getId()))) {
+					ses.invalidate();
+				}
+				req.setAttribute("msg_delete", 1);
+			} else {
 				req.setAttribute("msg_delete", 0);
 			}
 			

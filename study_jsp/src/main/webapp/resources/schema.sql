@@ -15,3 +15,7 @@ create user "jspuser"@"localhost" identified by "mysql";
 
 grant all privileges on jspdb.* to "jspuser"@"localhost" with grant option;
 flush privileges;
+
+-- 2023.05.15 : auth 속성 추가, phone 속성 수정
+alter table member add auth char(1) default = 0;
+alter table member modify column phone varchar(20);
