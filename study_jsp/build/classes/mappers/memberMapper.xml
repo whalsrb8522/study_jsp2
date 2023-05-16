@@ -16,8 +16,8 @@
 		update member set lastlogin = now() where id = #{id};
 	</update>
 	
-	<select id="list" resultType="map">
-		select id, name, regdate from member order by regdate;
+	<select id="list" resultType="mvo">
+		select * from member order by regdate;
 	</select>
 	
 	<update id="modify" parameterType="mvo">

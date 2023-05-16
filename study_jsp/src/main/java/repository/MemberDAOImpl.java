@@ -33,8 +33,7 @@ public class MemberDAOImpl implements MemberDAO {
 
 	@Override
 	public List<MemberVO> list() {
-		List<MemberVO> list = sql.selectList(NS + "list");
-		return list;
+		return sql.selectList(NS + "list");
 	}
 
 	@Override

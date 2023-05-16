@@ -30,7 +30,7 @@
 					<td>${mvo.id }</td>
 					<td>${mvo.name }</td>
 					<td>
-						<f:parseDate value="${mvo.regdate }" var="regdate" pattern="yyyy-MM-dd'T'HH:mm"/>
+						<f:parseDate value="${mvo.regdate }" var="regdate" pattern="yyyy-MM-dd HH:mm:ss"/>
 						<f:formatDate value="${regdate}" pattern="yy.MM.dd HH:mm"/>
 					</td>					
 				</tr>

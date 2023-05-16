@@ -113,12 +113,18 @@ public class MemberController extends HttpServlet {
 			
 			break;
 		case "modify_s2":
-			id = req.getParameter("id");
-			password = req.getParameter("password");
-			name = req.getParameter("name");
-			email = req.getParameter("email");
-			phone = req.getParameter("phone");
-			mvo = new MemberVO(id, password, name, email, phone);
+//			id = req.getParameter("id");
+//			password = req.getParameter("password");
+//			name = req.getParameter("name");
+//			email = req.getParameter("email");
+//			phone = req.getParameter("phone");
+			
+			mvo = new MemberVO(
+					req.getParameter("id"), 
+					req.getParameter("password"), 
+					req.getParameter("name"), 
+					req.getParameter("email"), 
+					req.getParameter("phone"));
 			
 			isOk = msv.modify(mvo);
 			log.info("* 회원수정 : " + (isOk > 0 ? "성공" : "실패"));
