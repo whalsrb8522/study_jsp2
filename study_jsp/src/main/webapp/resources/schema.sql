@@ -19,3 +19,13 @@ flush privileges;
 -- 2023.05.15 : member 테이블 auth 속성 추가, phone 속성 수정
 alter table member add auth char(1) default = 0;
 alter table member modify column phone varchar(20);
+
+-- 2023.05.16 : board 테이블 생성
+create table board (
+	bno int AUTO_INCREMENT NOT NULL PRIMARY KEY,
+	title varchar(30) NOT NULL,
+	writer varchar(20) NOT NULL,
+	regdate datetime NOT NULL DEFAULT NOW(),
+	content text,
+	readcount int default 0
+);

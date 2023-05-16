@@ -28,8 +28,8 @@ public class MemberController extends HttpServlet {
 	
 	private RequestDispatcher rdp;
 	private MemberService msv;
-	private int isOk;
 	private String destPage;
+	private int isOk;
 	HttpSession ses;
 	
 	MemberVO mvo;
@@ -45,7 +45,8 @@ public class MemberController extends HttpServlet {
 
 	protected void service(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 		req.setCharacterEncoding("UTF-8");
-		res.setCharacterEncoding("UTF-8");		res.setContentType("text/html; charset=UTF-8");
+		res.setCharacterEncoding("UTF-8");
+		res.setContentType("text/html; charset=UTF-8");
 		
 		String uri = req.getRequestURI();
 		String path = uri.substring(uri.lastIndexOf("/") + 1);
@@ -71,7 +72,7 @@ public class MemberController extends HttpServlet {
 				if(loginMvo != null) {
 					ses = req.getSession();		// 세션 가져오기
 					ses.setAttribute("ses", loginMvo);
-					ses.setMaxInactiveInterval(1 * 60);		// 로그인 유지 시간 (초단위)
+					ses.setMaxInactiveInterval(10 * 60);		// 로그인 유지 시간 (초단위)
 				} else {
 					req.setAttribute("msg_login", 0);
 				}
