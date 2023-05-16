@@ -35,7 +35,6 @@ public class BoardDAOImpl implements BoardDAO {
 	@Override
 	public BoardVO selectDetail(int bno) {
 		isOk = sql.update(NS + "readCountUp", bno);
-		
 		if (isOk > 0) {
 			sql.commit();
 		}
@@ -44,8 +43,17 @@ public class BoardDAOImpl implements BoardDAO {
 	}
 
 	@Override
-	public int upddate(BoardVO bvo) {
+	public int update(BoardVO bvo) {
 		isOk = sql.update(NS + "update", bvo);
+		if (isOk > 0) {
+			sql.commit();
+		}
+		return isOk;
+	}
+
+	@Override
+	public int delete(int bno) {
+		isOk = sql.delete(NS + "delete", bno);
 		if (isOk > 0) {
 			sql.commit();
 		}

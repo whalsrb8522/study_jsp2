@@ -9,4 +9,5 @@ public interface BoardService {
 	List<BoardVO> list();
 	BoardVO detail(int bno);
 	int modify(BoardVO bvo);
+	int delete(int bno);
 }

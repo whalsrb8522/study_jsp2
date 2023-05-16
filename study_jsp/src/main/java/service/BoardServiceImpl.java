@@ -30,6 +30,11 @@ public class BoardServiceImpl implements BoardService {
 
 	@Override
 	public int modify(BoardVO bvo) {
-		return bdao.upddate(bvo);
+		return bdao.update(bvo);
+	}
+
+	@Override
+	public int delete(int bno) {
+		return bdao.delete(bno);
 	}
 }

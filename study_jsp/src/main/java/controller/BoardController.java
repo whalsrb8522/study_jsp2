@@ -101,6 +101,15 @@ public class BoardController extends HttpServlet {
 			destPage = "/brd/detail?bno = " + bno; 
 			
 			break;
+		case "delete":
+			bno = Integer.parseInt(req.getParameter("bno"));
+			
+			isOk = bsv.delete(bno);
+			log.info("* 게시글 삭제 : " + (isOk > 0 ? "성공" : "실패"));
+			
+			destPage = "/brd/list";
+			
+			break;
 		}
 		
 		rdp = req.getRequestDispatcher(destPage);

@@ -35,7 +35,6 @@
 			</tr>
 		</table>
 		<button type="submit">수정</button>
-		<a href="brd/delete?bno=${bvo.bno }"><button type="button">삭제</button></a>
 		<a href="/brd/detail?bno=${bvo.bno }"><button type="button">취소</button></a>		
 	</form>
 

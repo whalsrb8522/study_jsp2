@@ -32,6 +32,7 @@
 		</tr>
 	</table>
 	<a href="/brd/modify_s1?bno=${bvo.bno }"><button type="button">modify</button></a>
+	<a href="brd/delete?bno=${bvo.bno }"><button type="button">delete</button></a>
 	<a href="/brd/list"><button type="button">list</button></a>
 </body>
 </html>

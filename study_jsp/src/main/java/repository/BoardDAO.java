@@ -8,5 +8,6 @@ public interface BoardDAO {
 	int insert(BoardVO bvo);
 	List<BoardVO> selectList();
 	BoardVO selectDetail(int bno);
-	int upddate(BoardVO bvo);
+	int update(BoardVO bvo);
+	int delete(int bno);
 }
