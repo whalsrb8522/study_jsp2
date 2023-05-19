@@ -37,9 +37,9 @@ public class BoardDAOImpl implements BoardDAO {
 		isOk = sql.update(NS + "readCountUp", bno);
 		if (isOk > 0) {
 			sql.commit();
+			return sql.selectOne(NS + "detail", bno);
 		}
-		
-		return sql.selectOne(NS + "detail", bno);
+		return null;
 	}
 
 	@Override
