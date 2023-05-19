@@ -29,3 +29,13 @@ create table board (
 	content text,
 	readcount int default 0
 );
+
+-- 2023.05.19 : comment 테이블 생성 (댓글번호, 게시글번호, 작성자, 내용, 작성일자)
+create table comment(
+	cno int not null auto_increment,
+	bno int not null default 0,
+	writer varchar(20) not null default "익명",
+	content text not null,
+	regdate datetime default now(),
+	primary key(cno)
+);
