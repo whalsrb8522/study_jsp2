@@ -30,9 +30,9 @@ public class MemberController extends HttpServlet {
 	private MemberService msv;
 	private String destPage;
 	private int isOk;
-	HttpSession ses;
+	private HttpSession ses;
 	
-	MemberVO mvo;
+	private MemberVO mvo;
 	private String id;
 	private String password;
 	private String name;

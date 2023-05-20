@@ -39,6 +39,8 @@ document.getElementById('cmtAddBtn').addEventListener('click', () => {
 	}
 });
 
+
+
 async function getCommentListFromServer(bno) {
 	try {
 		const resp = await fetch('/cmt/list/' + bno);
