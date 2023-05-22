@@ -18,7 +18,7 @@ import domain.BoardVO;
 import service.BoardService;
 import service.BoardServiceImpl;
 
-@WebServlet("/brd/*")
+@WebServlet("/brd.do/*")
 public class BoardController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 

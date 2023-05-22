@@ -3,16 +3,16 @@ async function postCommentToServer(cmtData) {
 	try {
 		const uri = "/cmt/post";
 		const config = {
-			method : 'post',
-			headers : {
-				'content-Type':'application/json; charset=UTF-8'
+			method: 'post',
+			headers: {
+				'content-Type': 'application/json; charset=UTF-8'
 			},
-			body : JSON.stringify(cmtData)
+			body: JSON.stringify(cmtData)
 		};
 		const resp = await fetch(uri, config);
 		const result = await resp.text();	// isOk
 		return result;
-	} catch(error) {
+	} catch (error) {
 		console.log(error);
 	}
 }
@@ -26,12 +26,12 @@ document.getElementById('cmtAddBtn').addEventListener('click', () => {
 		return false;
 	} else {
 		let cmtData = {
-			bno : bnoVal,
-			writer : document.getElementById('cmtWriter').value,
-			content : cmtText
+			bno: bnoVal,
+			writer: document.getElementById('cmtWriter').value,
+			content: cmtText
 		};
 		postCommentToServer(cmtData).then(result => {
-			if(result > 0) {
+			if (result > 0) {
 				alert('댓글 등록 정상');
 				document.getElementById('cmtText').value = '';
 				printCommentLlist(bnoVal);

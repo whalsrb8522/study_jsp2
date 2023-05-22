@@ -31,7 +31,6 @@ public class CommentController extends HttpServlet {
 	private CommentService csv;
 	
 	// 목적지 주소로 보내는 destPage 쓰지 않음
-
 	public CommentController() {
 		csv = new CommentServiceImpl();
     }
