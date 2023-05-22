@@ -8,6 +8,14 @@
 	</insert>
 	
 	<select id="selectComment" parameterType="int" resultType="cvo">
-		select * from comment where bno = #{bno}
+		select * from comment where bno = #{bno};
 	</select>
+	
+	<delete id="deleteComment" parameterType="int">
+		delete from comment where cno = #{cno};
+	</delete>
+	
+	<update id="updateComment" parameterType="cvo">
+		update comment set content = #{content} where cno = #{cno};
+	</update>
 </mapper>

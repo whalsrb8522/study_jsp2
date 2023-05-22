@@ -86,7 +86,8 @@ public class CommentController extends HttpServlet {
 			}
 			break;
 		case "list":
-			try {int bno = Integer.parseInt(pathVar);
+			try {
+				int bno = Integer.parseInt(pathVar);
 				List<CommentVO> list = csv.getList(bno);
 				log.info(">>> Comment list : " + list);
 				
@@ -101,10 +102,10 @@ public class CommentController extends HttpServlet {
 					jsonObjArr[i].put("writer", list.get(i).getWriter());
 					jsonObjArr[i].put("content", list.get(i).getContent());
 					jsonObjArr[i].put("regdate", list.get(i).getRegdate());
-					
 					jsonObjList.add(jsonObjArr[i]);
 				}
 				String jsonData = jsonObjList.toJSONString();
+				log.info(">>> jsonObjList : " + jsonData);
 				
 				PrintWriter out = res.getWriter();
 				out.print(jsonData);
@@ -113,6 +114,48 @@ public class CommentController extends HttpServlet {
 			}
 			
 			break;
+		case "remove":
+			try {
+				int cno = Integer.parseInt(req.getParameter("cnoVal"));		// 쿼리 스트링 방식
+				
+				isOk = csv.remove(cno);
+				log.info(">>> remove : " + (isOk > 0 ? "성공" : "실패"));
+				
+				PrintWriter out = res.getWriter();
+				out.print(isOk);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			
+			break;
+		case "modify":
+			try {
+				StringBuffer sb = new StringBuffer();
+				BufferedReader br = req.getReader();
+				String line = "";
+				while((line = br.readLine()) != null) {
+					sb.append(line);
+				}
+				log.info(">>> sb : " + sb.toString());
+				
+				JSONParser parser = new JSONParser();
+				JSONObject jsonObj = (JSONObject) parser.parse(sb.toString());
+				
+				int cno = Integer.parseInt(jsonObj.get("cno").toString());
+				String content = jsonObj.get("content").toString();
+				CommentVO cvo = new CommentVO(cno, content);
+				
+				log.info(">>> content : " + content);
+				
+				isOk = csv.modify(cvo);
+				log.info(">>> 댓글 수정 : " + (isOk > 0 ? "성공" : "실패"));
+				
+				// 결과 전송
+				PrintWriter out = res.getWriter();
+				out.print(isOk);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		}
     }
 

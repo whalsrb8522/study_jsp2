@@ -21,9 +21,9 @@
 			</tr>
 		</thead>
 		<tbody>
-			<c:forEach var="bvo" items="${list }">
+			<c:forEach var="bvo" items="${list }" varStatus="status">
 				<tr onclick="location.href='/brd/detail?bno=${bvo.bno }'">
-					<td>${bvo.bno }</td>
+					<td>${status.count}</td>
 					<td>${bvo.title }</td>
 					<td>${bvo.writer }</td>
 					<td>${bvo.regdate }</td>

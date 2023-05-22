@@ -7,12 +7,19 @@ public class CommentVO {
 	private String content;
 	private String regdate;	// Default : Now()
 	
-	// 개본 생성자
+	// 기본 생성자
 	public CommentVO() {}
 	
+	// 등록
 	public CommentVO(int bno, String writer, String content) {
 		this.bno = bno;
 		this.writer = writer;
+		this.content = content;
+	}
+
+	// 수정
+	public CommentVO(int cno, String content) {
+		this.cno = cno;
 		this.content = content;
 	}
 
