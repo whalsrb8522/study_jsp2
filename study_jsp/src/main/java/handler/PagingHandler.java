@@ -25,7 +25,7 @@ public class PagingHandler {
 		// (2 / 10) * 10 => 0.5(1) * 10 => 10, 20, 30...
 		// 1~0페이지까지 endPage = 10
 		// 11~13페이지까지 endPage = 13
-		this.endPage = (int)Math.ceil(pgvo.getPageNo() / (pgvo.getQty() * 1.0)) * pgvo.getQty();
+		this.endPage = (int) Math.ceil(pgvo.getPageNo() / (pgvo.getQty() * 1.0)) * pgvo.getQty();
 		this.startPage = this.endPage - 9;
 		
 		//페이지네이션의 전체 끝 페이지

@@ -26,7 +26,15 @@
 			<input type="text" name="keyword" placeholder="Search...">
 			<input type="hidden" name=pageNo value="${pgh.pgvo.pageNo}">
 			<input type="hidden" name=qty value="${pgh.pgvo.qty}">
- 			<input type="submit" value="SEARCH" class="btn btn-sm btn-primary">
+ 			<button type="submit" class="btn btn-sm btn-primary position-relative">
+ 				SEARCH
+ 					<c:if test="${pgh.pgvo.keyword != null && pgh.pgvo.keyword != '' }">
+		 				<span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+		 					${pgh.totalCount }
+		    				<span class="visually-hidden">unread messages</span>
+		  				</span>
+	  				</c:if>
+ 			</button>
 		</div>
 	</form>	
 
@@ -64,7 +72,10 @@
 	<c:if test="${pgh.next }">
 		<a href="/brd/page?pageNo=${pgh.endPage + 1 }&qty=${pgh.pgvo.qty}&type=${pgh.pgvo.type}&keyword=${pgh.pgvo.keyword}"> ▷ </a>
 	</c:if>
+	
 	<br>
+	
+	<input type="button" class="btn btn-sm btn-primary"	onclick="location.href='/brd/page?type=w&keyword=${ses.id}'" value="내가 쓴 글">
 	
 	<c:if test="${ses.id ne null }">
 		<a href="/brd/register_s1"><button class="btn btn-sm btn-primary">글쓰기</button></a>
