@@ -75,9 +75,9 @@
 	
 	<br>
 	
-	<input type="button" class="btn btn-sm btn-primary"	onclick="location.href='/brd/page?type=w&keyword=${ses.id}'" value="내가 쓴 글">
 	
 	<c:if test="${ses.id ne null }">
+		<input type="button" class="btn btn-sm btn-primary"	onclick="location.href='/brd/page?type=w&keyword=${ses.id}'" value="내가 쓴 글">
 		<a href="/brd/register_s1"><button class="btn btn-sm btn-primary">글쓰기</button></a>
 	</c:if>
 	<a href="/index.jsp"><button class="btn btn-sm btn-primary">메인 페이지로</button></a>

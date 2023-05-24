@@ -131,6 +131,7 @@ public class BoardController extends HttpServlet {
 					qty = Integer.parseInt(req.getParameter("qty"));
 				}
 				
+				
 				PagingVO pgvo = new PagingVO(pageNo, qty);
 				pgvo.setType(type);
 				pgvo.setKeyword(keyword);
