@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.session.SqlSession;
 
 import domain.BoardVO;
+import domain.PagingVO;
 import orm.DatabaseBuilder;
 
 public class BoardDAOImpl implements BoardDAO {
@@ -58,5 +59,15 @@ public class BoardDAOImpl implements BoardDAO {
 			sql.commit();
 		}
 		return isOk;
+	}
+
+	@Override
+	public int totCount() {
+		return sql.selectOne(NS+"cnt");
+	}
+
+	@Override
+	public List<BoardVO> pageList(PagingVO pgvo) {
+		return sql.selectList(NS+"pageList", pgvo);
 	}
 }

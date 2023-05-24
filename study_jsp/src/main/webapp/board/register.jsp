@@ -27,7 +27,7 @@
 			</tbody>
 		</table>
 		<button type="submit">register</button>
-		<a href="/brd/list"><button type="button">취소</button></a>
+		<a href="/brd/page"><button type="button">취소</button></a>
 	</form>
 </body>
 </html>

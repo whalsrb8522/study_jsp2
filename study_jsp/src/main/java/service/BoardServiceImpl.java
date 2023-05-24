@@ -3,6 +3,7 @@ package service;
 import java.util.List;
 
 import domain.BoardVO;
+import domain.PagingVO;
 import repository.BoardDAO;
 import repository.BoardDAOImpl;
 
@@ -36,5 +37,15 @@ public class BoardServiceImpl implements BoardService {
 	@Override
 	public int delete(int bno) {
 		return bdao.delete(bno);
+	}
+
+	@Override
+	public int getTotal() {
+		return bdao.totCount();
+	}
+
+	@Override
+	public List<BoardVO> getPageList(PagingVO pgvo) {
+		return bdao.pageList(pgvo);
 	}
 }

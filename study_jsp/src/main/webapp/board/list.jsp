@@ -23,7 +23,7 @@
 		<tbody>
 			<c:forEach var="bvo" items="${list }" varStatus="status">
 				<tr onclick="location.href='/brd/detail?bno=${bvo.bno }'">
-					<td>${status.count}</td>
+					<td>${bvo.bno}</td>
 					<td>${bvo.title }</td>
 					<td>${bvo.writer }</td>
 					<td>${bvo.regdate }</td>
@@ -32,6 +32,21 @@
 			</c:forEach>
 		</tbody>
 	</table>
+	
+	<c:if test="${pgh.prev }">
+		<a href="/brd/page?pageNo=${pgh.startPage - 1 }&qty=${pgh.pgvo.qty}"> ◁ </a>
+	</c:if>
+	
+	<c:forEach begin="${pgh.startPage }" end="${pgh.endPage }" var="i">
+		<a href="/brd/page?pageNo=${i }&qty=${pgh.pgvo.qty}">${i } | </a>
+	</c:forEach>
+	
+	<c:if test="${pgh.next }">
+		<a href="/brd/page?pageNo=${pgh.endPage + 1 }&qty=${pgh.pgvo.qty}"> ▷ </a>
+	</c:if>
+	
+	<br>
+	
 	<c:if test="${ses.id ne null }">
 		<a href="/brd/register_s1"><button>글쓰기</button></a>
 	</c:if>

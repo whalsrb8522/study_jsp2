@@ -15,10 +15,12 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import domain.BoardVO;
+import domain.PagingVO;
+import handler.PagingHandler;
 import service.BoardService;
 import service.BoardServiceImpl;
 
-@WebServlet("/brd.do/*")
+@WebServlet("/brd/*")
 public class BoardController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -46,15 +48,15 @@ public class BoardController extends HttpServlet {
 		log.info("* path : " + path);
 		
 		switch (path) {
-		case "list":
-			List<BoardVO> list = new ArrayList<BoardVO>();
-			
-			list = bsv.list();
-			req.setAttribute("list", list);
-			
-			destPage = "/board/list.jsp";
-			
-			break;
+//		case "list":
+//			List<BoardVO> list = new ArrayList<BoardVO>();
+//			
+//			list = bsv.list();
+//			req.setAttribute("list", list);
+//			
+//			destPage = "/board/list.jsp";
+//			
+//			break;
 		case "register_s1":
 			destPage = "/board/register.jsp";
 			
@@ -68,7 +70,7 @@ public class BoardController extends HttpServlet {
 			isOk = bsv.register(bvo);
 			log.info("* 게시글 등록 : " + (isOk > 0 ? "성공" : "실패"));
 			
-			destPage = "/brd/list";
+			destPage = "/brd/page";
 			
 			break;
 		case "detail":
@@ -107,8 +109,38 @@ public class BoardController extends HttpServlet {
 			isOk = bsv.delete(bno);
 			log.info("* 게시글 삭제 : " + (isOk > 0 ? "성공" : "실패"));
 			
-			destPage = "/brd/list";
+			destPage = "/brd/page";
 			
+			break;
+		case "page":
+			try {
+				int pageNo = 1;
+				int qty = 10;
+				
+				if(req.getParameter("pageNo") != null) {
+					pageNo = Integer.parseInt(req.getParameter("pageNo"));
+					qty = Integer.parseInt(req.getParameter("qty"));
+				}
+				
+				PagingVO pgvo = new PagingVO(pageNo,qty);
+				
+				//전체 페이지 개수
+				int totCount = bsv.getTotal();
+				log.info("전체 페이지 개수 : " + totCount);
+				
+				//limit를 이용한 select List를 호출 (startPage, qty
+				// 한페이지에 나와야 하는 리스트
+				List<BoardVO> boardList = bsv.getPageList(pgvo); 
+				log.info(">>>> list : " + boardList.size());
+				PagingHandler ph = new PagingHandler(pgvo, totCount);
+				req.setAttribute("pgh", ph);
+				req.setAttribute("list", boardList);
+				log.info("pageList 성공~!!");
+				destPage="/board/list.jsp";
+			} catch (Exception e) {
+				// TODO: handle exception
+				e.printStackTrace();
+			}
 			break;
 		}
 		

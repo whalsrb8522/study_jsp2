@@ -28,7 +28,7 @@
 		</c:when>
 	</c:choose>
 	
-	<a href="/brd/list"><button>board</button></a>
+	<a href="/brd/page"><button>board</button></a>
 	
 	<script>
 		const msg_login = `<c:out value="${msg_login }" />`;

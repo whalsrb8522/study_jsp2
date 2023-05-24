@@ -43,7 +43,7 @@
 		<a href="/brd/modify_s1?bno=${bvo.bno }"><button type="button">modify</button></a>
 		<a href="brd/delete?bno=${bvo.bno }"><button type="button">delete</button></a>
 	</c:if>
-	<a href="/brd/list"><button type="button">list</button></a>
+	<a href="/brd/page"><button type="button">list</button></a>
 	
 	<!-- 댓글 -->
 	<!-- ㄴ댓글 수정 (수정/삭제 버튼을 댓글 뒤쪽에 표시 -->

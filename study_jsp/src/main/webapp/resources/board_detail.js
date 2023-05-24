@@ -1,22 +1,3 @@
-// 화면에서 등록한 댓글내용을 컨트롤러로 전송 -> DB저장
-async function postCommentToServer(cmtData) {
-	try {
-		const uri = "/cmt/post";
-		const config = {
-			method: 'post',
-			headers: {
-				'content-Type': 'application/json; charset=UTF-8'
-			},
-			body: JSON.stringify(cmtData)
-		};
-		const resp = await fetch(uri, config);
-		const result = await resp.text();	// isOk
-		return result;
-	} catch (error) {
-		console.log(error);
-	}
-}
-
 // 미리 보낼 데이터를 만들어서 함수로 전달 cmtData
 document.getElementById('cmtAddBtn').addEventListener('click', () => {
 	const cmtText = document.getElementById('cmtText').value;
@@ -39,6 +20,25 @@ document.getElementById('cmtAddBtn').addEventListener('click', () => {
 		});
 	}
 });
+
+// 화면에서 등록한 댓글내용을 컨트롤러로 전송 -> DB저장
+async function postCommentToServer(cmtData) {
+	try {
+		const uri = "/cmt/post";
+		const config = {
+			method: 'post',
+			headers: {
+				'content-Type': 'application/json; charset=UTF-8'
+			},
+			body: JSON.stringify(cmtData)
+		};
+		const resp = await fetch(uri, config);
+		const result = await resp.text();	// isOk
+		return result;
+	} catch (error) {
+		console.log(error);
+	}
+}
 
 async function getCommentListFromServer(bno) {
 	try {
