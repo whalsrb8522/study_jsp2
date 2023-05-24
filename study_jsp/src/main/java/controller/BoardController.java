@@ -42,10 +42,13 @@ public class BoardController extends HttpServlet {
     }
 
 	protected void service(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
+    	req.setCharacterEncoding("UTF-8");
+    	res.setCharacterEncoding("UTF-8");
+    	
 		String uri = req.getRequestURI();
 		String path = uri.substring(uri.lastIndexOf("/") + 1);
-		log.info("* uri : " + uri);		
-		log.info("* path : " + path);
+		log.info(">>> uri : " + uri);		
+		log.info(">>> path : " + path);
 		
 		switch (path) {
 //		case "list":
@@ -68,7 +71,7 @@ public class BoardController extends HttpServlet {
 			bvo = new BoardVO(title, writer, content);
 			
 			isOk = bsv.register(bvo);
-			log.info("* 게시글 등록 : " + (isOk > 0 ? "성공" : "실패"));
+			log.info(">>> 게시글 등록 : " + (isOk > 0 ? "성공" : "실패"));
 			
 			destPage = "/brd/page";
 			
@@ -98,7 +101,7 @@ public class BoardController extends HttpServlet {
 			bvo = new BoardVO(bno, title, content);
 			
 			isOk = bsv.modify(bvo);
-			log.info("* 게시글 수정 : " + (isOk > 0 ? "성공" : "실패"));
+			log.info(">>> 게시글 수정 : " + (isOk > 0 ? "성공" : "실패"));
 			
 			destPage = "/brd/detail?bno = " + bno; 
 			
@@ -107,7 +110,7 @@ public class BoardController extends HttpServlet {
 			bno = Integer.parseInt(req.getParameter("bno"));
 			
 			isOk = bsv.delete(bno);
-			log.info("* 게시글 삭제 : " + (isOk > 0 ? "성공" : "실패"));
+			log.info(">>> 게시글 삭제 : " + (isOk > 0 ? "성공" : "실패"));
 			
 			destPage = "/brd/page";
 			
@@ -117,25 +120,34 @@ public class BoardController extends HttpServlet {
 				int pageNo = 1;
 				int qty = 10;
 				
+				String type = req.getParameter("type");
+				String keyword = req.getParameter("keyword");
+				
+				log.info(">>> type : " + type);
+				log.info(">>> keyword : " + keyword);
+				
 				if(req.getParameter("pageNo") != null) {
 					pageNo = Integer.parseInt(req.getParameter("pageNo"));
 					qty = Integer.parseInt(req.getParameter("qty"));
 				}
 				
-				PagingVO pgvo = new PagingVO(pageNo,qty);
+				PagingVO pgvo = new PagingVO(pageNo, qty);
+				pgvo.setType(type);
+				pgvo.setKeyword(keyword);
+				
+				log.info(">>> pgvo : " + pgvo.toString());
 				
 				//전체 페이지 개수
-				int totCount = bsv.getTotal();
-				log.info("전체 페이지 개수 : " + totCount);
+				int totCount = bsv.getTotal(pgvo);
+				log.info(">>> totCount : " + totCount);
 				
 				//limit를 이용한 select List를 호출 (startPage, qty
 				// 한페이지에 나와야 하는 리스트
 				List<BoardVO> boardList = bsv.getPageList(pgvo); 
-				log.info(">>>> list : " + boardList.size());
+				log.info(">>> boardList size : " + boardList.size());
 				PagingHandler ph = new PagingHandler(pgvo, totCount);
 				req.setAttribute("pgh", ph);
 				req.setAttribute("list", boardList);
-				log.info("pageList 성공~!!");
 				destPage="/board/list.jsp";
 			} catch (Exception e) {
 				// TODO: handle exception

@@ -11,6 +11,6 @@ public interface BoardDAO {
 	BoardVO selectDetail(int bno);
 	int update(BoardVO bvo);
 	int delete(int bno);
-	int totCount();
+	int totCount(PagingVO pgvo);
 	List<BoardVO> pageList(PagingVO pgvo);
 }

@@ -40,12 +40,12 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	@Override
-	public int getTotal() {
-		return bdao.totCount();
+	public List<BoardVO> getPageList(PagingVO pgvo) {
+		return bdao.pageList(pgvo);
 	}
 
 	@Override
-	public List<BoardVO> getPageList(PagingVO pgvo) {
-		return bdao.pageList(pgvo);
+	public int getTotal(PagingVO pgvo) {
+		return bdao.totCount(pgvo);
 	}
 }

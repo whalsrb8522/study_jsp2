@@ -11,6 +11,6 @@ public interface BoardService {
 	BoardVO detail(int bno);
 	int modify(BoardVO bvo);
 	int delete(int bno);
-	int getTotal();
+	int getTotal(PagingVO pgvo);
 	List<BoardVO> getPageList(PagingVO pgvo);
 }

@@ -3,34 +3,67 @@
 
 <mapper namespace="BoardMapper">
 	<insert id="insert" parameterType="bvo">
-		insert into board(title, writer, content) values(#{title}, #{writer}, #{content});
+		insert into board(title, writer, content) values(#{title}, #{writer}, #{content})
 	</insert>
 	
 	<select id="list" resultType="bvo">
-		select * from board order by bno;
+		select * from board order by bno
 	</select>
 	
 	<select id="detail" parameterType="int" resultType="bvo">
-		select * from board where bno = #{bno};
+		select * from board where bno = #{bno}
 	</select>
 	
 	<update id="readCountUp" parameterType="int">
-		update board set readcount = readcount + 1 where bno = #{bno};
+		update board set readcount = readcount + 1 where bno = #{bno}
 	</update>
 	
 	<update id="update" parameterType="bvo">
-		update board set title = #{title}, content=#{content} where bno = #{bno};
+		update board set title = #{title}, content=#{content} where bno = #{bno}
 	</update>
 	
 	<delete id="delete" parameterType="int">
-		delete from board where bno = #{bno}; 
+		delete from board where bno = #{bno} 
 	</delete>
 	
-  	<select id="cnt" resultType="int">
-  		select count(bno) from board;
+  	<select id="cnt" parameterType="pgvo" resultType="int">
+  		select count(bno) from board where bno > 0
+  			<include refid="search"></include>
   	</select>
   	
   	<select id="pageList" parameterType="pgvo" resultType="bvo">
-  		select * from board order by bno desc limit #{pageStart}, #{qty};
+  		select * from board order by bno desc limit #{pageStart}, #{qty}
   	</select>
+  	
+  	<select id="selectList" parameterType="pgvo" resultType="bvo">
+  		select * from (
+  			select bno from board where bno > 0
+  			<include refid="search"></include>
+  			order by bno desc
+  			limit #{pageStart}, #{qty}
+  		) a left join board b
+  		on a.bno = b.bno
+  	</select>
+  	
+  	<sql id="search">
+  		<if test="type != null">
+  			<trim prefix="and (" suffix=")" prefixOverrides="or">
+  				<foreach collection="typeToArray">
+  					<trim prefix="or">
+  						<choose>
+  							<when test="type == 't'.toString()">
+  								title like concat('%', #{keyword}, '%')
+  							</when>
+  							<when test="type == 'w'.toString()">
+  								writer like concat('%', #{keyword}, '%')
+  							</when>
+  							<when test="type == 'c'.toString()">
+  								content like concat('%', #{keyword}, '%')
+  							</when>
+  						</choose>
+  					</trim>
+  				</foreach>
+  			</trim>
+  		</if>	
+  	</sql>
 </mapper>
