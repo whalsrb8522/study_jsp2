@@ -14,6 +14,10 @@
 		select * from board where bno = #{bno}
 	</select>
 	
+	<select id="selectFileName" parameterType="int" resultType="String">
+		select image from board where bno = #{bno}
+	</select>
+	
 	<update id="readCountUp" parameterType="int">
 		update board set readcount = readcount + 1 where bno = #{bno}
 	</update>

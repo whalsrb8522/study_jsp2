@@ -71,4 +71,9 @@ public class BoardDAOImpl implements BoardDAO {
 	public int totCount(PagingVO pgvo) {
 		return sql.selectOne(NS + "cnt", pgvo);
 	}
+
+	@Override
+	public String selectFileName(int bno) {
+		return sql.selectOne(NS + "selectFileName", bno);
+	}
 }

@@ -13,4 +13,5 @@ public interface BoardService {
 	int delete(int bno);
 	int getTotal(PagingVO pgvo);
 	List<BoardVO> getPageList(PagingVO pgvo);
+	String getFileName(int bno);
 }

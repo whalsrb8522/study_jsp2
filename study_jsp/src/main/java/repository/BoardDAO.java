@@ -13,4 +13,5 @@ public interface BoardDAO {
 	int delete(int bno);
 	int totCount(PagingVO pgvo);
 	List<BoardVO> pageList(PagingVO pgvo);
+	String selectFileName(int bno);
 }

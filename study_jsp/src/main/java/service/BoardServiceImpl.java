@@ -48,4 +48,9 @@ public class BoardServiceImpl implements BoardService {
 	public int getTotal(PagingVO pgvo) {
 		return bdao.totCount(pgvo);
 	}
+
+	@Override
+	public String getFileName(int bno) {
+		return bdao.selectFileName(bno);
+	}
 }

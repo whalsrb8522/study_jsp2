@@ -42,6 +42,7 @@ public class BoardController extends HttpServlet {
 	private String title;
 	private String writer;
 	private String content;
+	private String image; 
 	
     public BoardController() {
     	bsv = new BoardServiceImpl();
@@ -246,14 +247,14 @@ public class BoardController extends HttpServlet {
 			break;
 		case "delete":
 			bno = Integer.parseInt(req.getParameter("bno"));
-			bvo = bsv.detail(bno);
+			image = bsv.getFileName(bno);
 			
 			if (bvo.getImage() != null) {
 				savePath = getServletContext().getRealPath("_fileUpload");
 				File fileDir = new File(savePath);
 				
-				File deleteFilePath = new File(fileDir + File.separator + bvo.getImage());
-				File deleteThumbFilePath = new File(fileDir + File.separator + "th_" + bvo.getImage());
+				File deleteFilePath = new File(fileDir + File.separator + image);
+				File deleteThumbFilePath = new File(fileDir + File.separator + "th_" + image);
 				log.info(">>> deleteFilePath : " + deleteFilePath);
 				log.info(">>> deleteThumbFilePath : " + deleteThumbFilePath);
 				
@@ -265,7 +266,7 @@ public class BoardController extends HttpServlet {
 			log.info(">>> 게시글 삭제 : " + (isOk > 0 ? "성공" : "실패"));
 			
 			destPage = "/brd/page";
-			
+			 
 			break;
 		case "page":
 			try {
