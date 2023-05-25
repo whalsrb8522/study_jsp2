@@ -13,7 +13,7 @@
 
 	<h1>Detail Page</h1>
 	
-	<table class="table table-bordered table-hover">
+	<table class="table table-bordered">
 		<tr>
 			<th>글번호</th>
 			<td>${bvo.bno }</td>
@@ -36,25 +36,32 @@
 		</tr>
 		<tr>
 			<th>내용</th>
-			<td>${bvo.content}</td>
+			<td>
+				<c:if test="${bvo.image ne '' && bvo.image ne null }">
+					<img alt="" src="/_fileUpload/${bvo.image }">
+				</c:if>
+				${bvo.content}
+			</td>
 		</tr>
 	</table>
 	<c:if test="${ses.id  eq bvo.writer}">
-		<a href="/brd/modify_s1?bno=${bvo.bno }"><button type="button">modify</button></a>
-		<a href="brd/delete?bno=${bvo.bno }"><button type="button">delete</button></a>
+		<a href="/brd/modify_s1?bno=${bvo.bno }"><button type="button" class="btn btn-sm btn-primary">modify</button></a>
+		<a href="brd/delete?bno=${bvo.bno }"><button type="button" class="btn btn-sm btn-primary">delete</button></a>
 	</c:if>
-	<a href="/brd/page"><button type="button">list</button></a>
+	<a href="/brd/page"><button type="button" class="btn btn-sm btn-primary">list</button></a>
 	
 	<!-- 댓글 -->
 	<!-- ㄴ댓글 수정 (수정/삭제 버튼을 댓글 뒤쪽에 표시 -->
 	
 	<!-- ㄴ댓글 등록 -->
-	<div>
-		<h3>Comment Line</h3> <br>
-		<input type="text" id="cmtWriter" value="${ses.id }" readonly="readonly">
-		<input type="text" id="cmtText" placeholder="Add comment">
-		<button type="button" id="cmtAddBtn">댓글등록</button>
-	</div>
+	<c:if test="${ses.id ne null }">
+		<div>
+			<h3>Comment Line</h3> <br>
+			<input type="text" id="cmtWriter" value="${ses.id }" readonly="readonly">
+			<input type="text" id="cmtText" placeholder="Add comment">
+			<button type="button" id="cmtAddBtn" class="btn btn-sm btn-primary">댓글등록</button>
+		</div>
+	</c:if>
 	
 	<!-- ㄴ댓글 표시 (list) -->
 	<div class="accordion" id="accordionExample">

@@ -6,6 +6,7 @@ public class BoardVO {
 	private String writer;
 	private String regdate;
 	private String content;
+	private String image;
 	private int readcount;
 	
 	public BoardVO() {}
@@ -43,6 +44,16 @@ public class BoardVO {
 		this.content = content;
 	}
 
+	public BoardVO(int bno, String title, String writer, String regdate, String content, String image, int readcount) {
+		this.bno = bno;
+		this.title = title;
+		this.writer = writer;
+		this.regdate = regdate;
+		this.content = content;
+		this.image = image;
+		this.readcount = readcount;
+	}
+
 	// getter
 	public int getBno() {
 		return bno;
@@ -61,6 +72,9 @@ public class BoardVO {
 	}
 	public int getReadcount() {
 		return readcount;
+	}
+	public String getImage() {
+		return image;
 	}
 	
 	// setter
@@ -81,5 +95,8 @@ public class BoardVO {
 	}
 	public void setReadcount(int readcount) {
 		this.readcount = readcount;
+	}
+	public void setImage(String image) {
+		this.image = image;
 	}
 }

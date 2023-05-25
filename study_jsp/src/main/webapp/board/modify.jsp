@@ -9,7 +9,7 @@
 <body>
 	<h1>Modify Page</h1>
 	
-	<form action="/brd/modify_s2">
+	<form action="/brd/modify_s2" method="post" enctype="multipart/form-data">
 		<input type="text" name="bno" value="${bvo.bno }" hidden="">
 		<table border="1" style="border-collapse: collapse;">
 			<tr>
@@ -33,9 +33,16 @@
 				<td><textarea name="content" rows="" cols="">${bvo.content }</textarea>
 				</td>
 			</tr>
+			<tr>
+				<th>이미지</th>
+				<td>
+					<img alt="" src="/_fileUpload/th_${bvo.image }"> <br>
+					<input type="file" id="file" name="newImage" accept="image/png, image/jpg, image/jpeg, image/bmp, image/gif">
+				</td>
+			</tr>
 		</table>
 		<button type="submit">수정</button>
-		<a href="/brd/detail?bno=${bvo.bno }"><button type="button">취소</button></a>		
+		<a href="javascript:history.back()"><button type="button">취소</button></a>		
 	</form>
 
 </body>

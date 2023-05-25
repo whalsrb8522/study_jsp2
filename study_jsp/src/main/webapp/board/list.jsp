@@ -38,7 +38,7 @@
 		</div>
 	</form>	
 
-	<table class="table">
+	<table class="table table-bordered">
 		<thead>
 			<tr>
 				<th>번호</th>
@@ -52,7 +52,12 @@
 			<c:forEach var="bvo" items="${list }" varStatus="status">
 				<tr onclick="location.href='/brd/detail?bno=${bvo.bno }'">
 					<td>${bvo.bno}</td>
-					<td>${bvo.title }</td>
+					<td>
+						<c:if test="${bvo.image ne null && bvo.image ne '' }">
+							<img alt="thumbnail" src="/_fileUpload/th_${bvo.image }">
+						</c:if>
+						${bvo.title }
+					</td>
 					<td>${bvo.writer }</td>
 					<td>${bvo.regdate }</td>
 					<td>${bvo.readcount }</td>

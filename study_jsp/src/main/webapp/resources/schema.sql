@@ -39,3 +39,6 @@ create table comment(
 	regdate datetime default now(),
 	primary key(cno)
 );
+
+-- 2023.05.25 : board 테이블 image 속성 추가
+alter table board add image text;

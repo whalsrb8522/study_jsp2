@@ -9,7 +9,7 @@
 <body>
 	<h1>Board register page</h1>
 	
-	<form action="/brd/register_s2">
+	<form action="/brd/register_s2" method="post" enctype="multipart/form-data">
 		<table>
 			<tbody>
 				<tr>
@@ -23,6 +23,13 @@
 				<tr>
 					<td>content</td>
 					<td><textarea rows="" cols="" name="content"></textarea></td>
+				</tr>
+				<tr>
+					<td>imageType</td>
+					<td>
+						<input type="file" id="file" name="image" 
+						accept="image/png, image/jpg, image/jpeg, image/bmp, image/gif">
+					</td>
 				</tr>
 			</tbody>
 		</table>
