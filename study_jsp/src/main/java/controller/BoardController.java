@@ -260,7 +260,7 @@ public class BoardController extends HttpServlet {
 				
 				deleteFilePath.delete();
 				deleteThumbFilePath.delete();
-			}
+			} 
 			
 			isOk = bsv.delete(bno);
 			log.info(">>> 게시글 삭제 : " + (isOk > 0 ? "성공" : "실패"));
